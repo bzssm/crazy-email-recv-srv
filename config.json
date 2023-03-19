@@ -1,0 +1,16 @@
+{
+  "smtpd": {
+    "host": "localhost",
+    "port": 25
+  },
+  "rest": {
+    "port": 14000
+  },
+  "database": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "password",
+    "database": "main"
+  }
+}

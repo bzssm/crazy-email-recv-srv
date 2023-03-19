@@ -1,19 +1,20 @@
+import json
+
 from smtpx import CrazySrvHandler
 from web import web_start
 
 from aiosmtpd.controller import Controller
 from aiosmtpd.smtp import SMTP
-import configparser
 
 if __name__ == "__main__":
-    cf = configparser.ConfigParser()
-    cf.read("cfg.ini")
+    json_str = open("config.json").read()
+    cf = json.loads(json_str)
 
-    smtpd_host = cf.get("smtpd", "host")
-    smtpd_port = cf.getint("smtpd", "port")
+    smtpd_host = cf["smtpd"]["host"]
+    smtpd_port = cf["smtpd"]["port"]
 
     rest_host = smtpd_host
-    rest_port = cf.getint("rest", "port")
+    rest_port = cf["rest"]["port"]
 
     handler = CrazySrvHandler()
     controller = Controller(handler, hostname=smtpd_host, port=smtpd_port)

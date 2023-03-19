@@ -1,7 +1,7 @@
 import json
 from flask import Flask
 from flask import send_file
-from data import dataInstance
+from data import dataInstance, DateTimeMarshaller
 
 app = Flask(__name__)
 dao = dataInstance
@@ -19,16 +19,16 @@ def index():
 @app.route('/all')
 def msg_all():
     rows = dao.read_all()
-    return json.dumps(rows)
+    return json.dumps(rows, cls=DateTimeMarshaller)
 
 
 @app.route('/from/<addr>')
 def msg_from(addr):
     rows = dao.read_from(addr)
-    return json.dumps(rows)
+    return json.dumps(rows, cls=DateTimeMarshaller)
 
 
 @app.route('/to/<addr>')
 def msg_to(addr):
     rows = dao.read_to(addr)
-    return json.dumps(rows)
+    return json.dumps(rows, cls=DateTimeMarshaller)
